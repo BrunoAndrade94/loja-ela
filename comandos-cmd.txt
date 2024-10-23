@@ -1,0 +1,7 @@
+CRIAR PROJETO
+npm create-next-app@latest nome-do-projeto
+npm create-react-app@latest nome-do-projeto
+
+LIMPAR CACHE
+rm -rf .next (cmd)
+Remove-Item -Recurse -Force .next (powershell)
