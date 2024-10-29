@@ -1,14 +1,23 @@
+"use client"
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import { useCurrent } from "@/features/auth/api/use-current";
 
 export default function Home() {
+  const router = useRouter()
+  const { data, isLoading } = useCurrent()
+
+  useEffect(() => {
+    if (!data && !isLoading) {
+      router.push("/sign-in")
+    }
+  }, [data])
+
   return (
-    <div className="p-7">
-      <Link href="/sign-in">
-        <Button> Acessar Aqui
-        </Button>
-      </Link>
+    <div>
+      Apenas usuários autorizados!
     </div>
   );
 }

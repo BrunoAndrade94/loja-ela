@@ -4,14 +4,19 @@ import { deleteCookie, setCookie } from "hono/cookie"
 
 import { zValidator } from "@hono/zod-validator"
 import { createAdminClient } from "@/lib/appwrite"
+import { sessionMiddleware } from "@/lib/session-middleware"
 
 import { AUTH_COOKIE } from "../constants"
 import { loginSchema, registerSchema } from "../schemas"
 
 const app = new Hono()
-  .post(
-    "/login",
-    zValidator("json", loginSchema),
+  .get("/current", sessionMiddleware,
+    (c) => {
+      const user = c.get("user")
+
+      return c.json({ data: user })
+    })
+  .post("/login", zValidator("json", loginSchema),
     async (c) => {
       const { email, password } = c.req.valid("json")
       const { account } = await createAdminClient()
@@ -29,9 +34,7 @@ const app = new Hono()
       return c.json({ success: true })
     }
   )
-  .post(
-    "/register",
-    zValidator("json", registerSchema),
+  .post("/register", zValidator("json", registerSchema),
     async (c) => {
       const { name, email, password } = c.req.valid("json")
       const { account } = await createAdminClient()
@@ -55,9 +58,13 @@ const app = new Hono()
       return c.json({ data: user })
     }
   )
-  .post("/logout", (c) => {
-    deleteCookie(c, AUTH_COOKIE)
+  .post("/logout", sessionMiddleware,
+    async (c) => {
+      const account = c.get("account")
 
-    return c.json({ sucess: true })
-  })
+      deleteCookie(c, AUTH_COOKIE)
+      await account.deleteSession("current")
+
+      return c.json({ sucess: true })
+    })
 export default app
