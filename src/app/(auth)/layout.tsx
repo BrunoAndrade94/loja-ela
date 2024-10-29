@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 interface AuthLayoutProps {
@@ -11,9 +10,6 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       <div className="mx-auto max-w-screen-2xl p-4">
         <nav className="flex justify-between items-center">
           <Image src="/logo.svg" alt="logo" width={152} height={56} />
-          <Button variant="outline">
-            LOGAR
-          </Button>
         </nav>
         <div className="flex flex-col items-center justify-center pt-4 md:pt-14">
           {children}
@@ -21,6 +17,6 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       </div>
     </main>
   );
-}
+};
 
 export default AuthLayout;

@@ -1,21 +1,21 @@
 {
   "rules": {
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": 1,
     "semi": [
-      "warn",
+      1,
       "always"
     ], // Exigir ponto e vírgula
     "quotes": [
-      "warn",
+      0,
       "backtick"
     ], // Exigir aspas grave `
     "indent": [
-      "warn",
+      1,
       2
     ], // Tamanho da indentação (4 espaços)
-    "prefer-const": "warn", // Preferir const sobre let se a variável não for reatribuída,
+    "prefer-const": 1, // Preferir const sobre let se a variável não for reatribuída,
     "comma-dangle": [
-      "warn",
+      1,
       {
         "arrays": "always-multiline", // Exigir vírgula final em arrays com múltiplas linhas
         "objects": "always-multiline", // Exigir vírgula final em objetos com múltiplas linhas

@@ -1,33 +1,35 @@
-import { z } from "zod"
-import Link from "next/link"
-import { useForm } from "react-hook-form"
-import { FcGoogle } from "react-icons/fc"
+"use client";
 
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { useRegister } from "@/app/(auth)/api/use-register"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { DottedSeparator } from "@/components/my-components/dotted-separator"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form"
+import { z } from "zod";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 
-import { registerSchema } from "../schemas"
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useRegister } from "@/features/auth/api/use-register";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { DottedSeparator } from "@/components/my-components/dotted-separator";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form";
+
+import { registerSchema } from "../schemas";
 
 export const SignUpCard = () => {
-  const { mutate } = useRegister()
+  const { mutate, isPending } = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    }
-  })
+      name: ``,
+      email: ``,
+      password: ``,
+    },
+  });
 
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
-    mutate({ json: values })
-  }
+    mutate({ json: values });
+  };
 
   return (
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
@@ -84,7 +86,7 @@ export const SignUpCard = () => {
                   </FormControl>
                   <FormMessage />
                 </FormItem>)} />
-            <Button disabled={false} size="lg" className="w-full">
+            <Button disabled={isPending} size="lg" className="w-full">
               Cadastrar
             </Button>
           </form>
@@ -117,5 +119,5 @@ export const SignUpCard = () => {
         </p>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
