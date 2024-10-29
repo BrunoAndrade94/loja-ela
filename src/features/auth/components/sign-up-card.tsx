@@ -1,24 +1,23 @@
 import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
+import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { FcGoogle } from "react-icons/fc"
+import { registerSchema } from "../schemas"
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { DottedSeparator } from "@/components/my-components/dotted-separator"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-
-const formSchema = z.object({
-  name: z.string().trim().min(5, "sem nome"),
-  email: z.string().email(),
-  password: z.string().min(8, "minimo 8")
-})
+import { useRegister } from "@/app/(auth)/api/register-login"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { DottedSeparator } from "@/components/my-components/dotted-separator"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form"
 
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister()
+
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -26,8 +25,8 @@ export const SignUpCard = () => {
     }
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values })
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values })
   }
 
   return (
@@ -36,9 +35,9 @@ export const SignUpCard = () => {
         <CardTitle className="text-2xl">
           Cadastre-se!
         </CardTitle>
-        {/* <CardDescription >
-          ----
-        </ CardDescription > */}
+        <CardDescription >
+          descrição aqui
+        </ CardDescription >
       </CardHeader>
       <div className="px-7">
         <DottedSeparator />

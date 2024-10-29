@@ -1,18 +1,16 @@
 import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { FcGoogle } from "react-icons/fc"
-import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { loginSchema } from "../schemas"
+import { FcGoogle } from "react-icons/fc"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-import {
-  Card, CardContent, CardHeader, CardTitle
-} from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { DottedSeparator } from "@/components/my-components/dotted-separator"
 import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form"
 import { useLogin } from "@/app/(auth)/api/use-login"
+import { DottedSeparator } from "@/components/my-components/dotted-separator"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form"
 
 export const SignInCard = () => {
   const { mutate } = useLogin()
@@ -22,11 +20,11 @@ export const SignInCard = () => {
     defaultValues: {
       email: "",
       password: "",
-    }
+    },
   })
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    mutate(values)
+    mutate({ json: values })
   }
 
   return (
@@ -102,7 +100,7 @@ export const SignInCard = () => {
           Ainda não possui cadastro?&nbsp;
           <Link href="/sign-up">
             <span className="text-blue-700">
-              Cadastre-se
+              Cadastre-se!
             </span>
           </Link>
         </p>
