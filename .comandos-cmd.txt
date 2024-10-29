@@ -5,3 +5,5 @@ npm create-react-app@latest nome-do-projeto
 LIMPAR CACHE
 rm -rf .next (cmd)
 Remove-Item -Recurse -Force .next (powershell)
+
+PAROU NO VIDEO 2:43

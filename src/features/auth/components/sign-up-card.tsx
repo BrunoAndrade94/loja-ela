@@ -2,19 +2,19 @@ import { z } from "zod"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { FcGoogle } from "react-icons/fc"
-import { registerSchema } from "../schemas"
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useRegister } from "@/app/(auth)/api/register-login"
+import { useRegister } from "@/app/(auth)/api/use-register"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { DottedSeparator } from "@/components/my-components/dotted-separator"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormItem, FormField, FormMessage } from "@/components/ui/form"
 
+import { registerSchema } from "../schemas"
+
 export const SignUpCard = () => {
   const { mutate } = useRegister()
-
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -85,7 +85,7 @@ export const SignUpCard = () => {
                   <FormMessage />
                 </FormItem>)} />
             <Button disabled={false} size="lg" className="w-full">
-              Login
+              Cadastrar
             </Button>
           </form>
         </Form>
