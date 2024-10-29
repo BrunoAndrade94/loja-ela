@@ -1,6 +1,29 @@
 {
   "rules": {
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "semi": [
+      "warn",
+      "always"
+    ], // Exigir ponto e vírgula
+    "quotes": [
+      "warn",
+      "backtick"
+    ], // Exigir aspas grave `
+    "indent": [
+      "warn",
+      2
+    ], // Tamanho da indentação (4 espaços)
+    "prefer-const": "warn", // Preferir const sobre let se a variável não for reatribuída,
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "always-multiline", // Exigir vírgula final em arrays com múltiplas linhas
+        "objects": "always-multiline", // Exigir vírgula final em objetos com múltiplas linhas
+        "imports": "always-multiline", // Exigir vírgula final em importações com múltiplas linhas
+        "exports": "always-multiline", // Exigir vírgula final em exportações com múltiplas linhas
+        "functions": "ignore" // Não exigir vírgula final em parâmetros de função
+      }
+    ]
   },
   "extends": [
     "next/core-web-vitals",
