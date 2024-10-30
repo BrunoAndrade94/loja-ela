@@ -6,7 +6,7 @@ export const Navbar = () => {
     <nav className="pt-4 px-6 flex items-center justify-between">
       <div className="flex-col hidden lg:flex">
         <h1 className="text-2xl font-semibold">Home</h1>
-        <p className="text-muted-foreground">Aqui pode ver nossos produtinhos</p>
+        <p className="text-muted-foreground">Aqui pode ver seus produtinhos</p>
       </div>
       <MobileSidebar />
       <UserButton />

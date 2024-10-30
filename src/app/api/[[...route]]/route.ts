@@ -1,15 +1,15 @@
 import { Hono } from "hono";
-import { handle } from "hono/vercel"
+import { handle } from "hono/vercel";
 
-import auth from "@/features/auth/server/route"
+import auth from "@/features/auth/server/route";
 
 const app = new Hono()
-  .basePath("/api")
+  .basePath("/api");
 
 const routes = app
-  .route("auth", auth)
+  .route("auth", auth);
 
-export const GET = handle(app)
-export const POST = handle(app)
+export const GET = handle(app);
+export const POST = handle(app);
 
 export type AppType = typeof routes

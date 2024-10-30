@@ -4,31 +4,29 @@ import { Icon, SettingsIcon, UserIcon } from "lucide-react";
 import { GoCheckCircleFill, GoHome, GoHomeFill } from "react-icons/go";
 
 import { cn } from "@/lib/utils";
+import { SRC_HOME } from "@/features/auth/server/constant-routes";
 
 const routes = [
   {
-    label: "Home",
-    href: "",
-    icon: GoHome,
-    activeIcon: GoHomeFill,
-  },
-  {
-    label: "Minhas Compras",
-    href: "/compras",
-    icon: FaShoppingBag,
-    activeIcon: FaShoppingBag,
-  },
-  {
-    label: "Configurações",
-    href: "/settings",
-    icon: SettingsIcon,
-    activeIcon: SettingsIcon,
-  },
-  {
-    label: "Membros",
-    href: "/members",
+    label: "Conta",
+    href: SRC_HOME,
     icon: UserIcon,
     activeIcon: UserIcon,
+  }, {
+    label: "Compras",
+    href: SRC_HOME,
+    icon: FaShoppingBag,
+    activeIcon: FaShoppingBag,
+  }, {
+    label: "Fidalidade",
+    href: SRC_HOME,
+    icon: UserIcon,
+    activeIcon: UserIcon,
+  }, {
+    label: "Configurações",
+    href: SRC_HOME,
+    icon: SettingsIcon,
+    activeIcon: SettingsIcon,
   },
 ];
 

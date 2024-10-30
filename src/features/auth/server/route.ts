@@ -8,15 +8,16 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { AUTH_COOKIE } from "../constants";
 import { loginSchema, registerSchema } from "../schemas";
+import { SRC_CURRENT, SRC_HOME, SRC_LOGIN, SRC_LOGOUT, SRC_REGISTER } from "./constant-routes";
 
 const app = new Hono()
-  .get(`/current`, sessionMiddleware,
+  .get(SRC_CURRENT, sessionMiddleware,
     (c) => {
       const user = c.get(`user`);
 
       return c.json({ data: user });
     })
-  .post(`/login`, zValidator(`json`, loginSchema),
+  .post(SRC_LOGIN, zValidator(`json`, loginSchema),
     async (c) => {
       const { email, password } = c.req.valid(`json`);
       const { account } = await createAdminClient();
@@ -25,7 +26,7 @@ const app = new Hono()
         password
       );
       setCookie(c, AUTH_COOKIE, session.secret, {
-        path: `/`,
+        path: SRC_HOME,
         httpOnly: true,
         secure: true,
         sameSite: `strict`,
@@ -34,7 +35,7 @@ const app = new Hono()
       return c.json({ success: true });
     }
   )
-  .post(`/register`, zValidator(`json`, registerSchema),
+  .post(SRC_REGISTER, zValidator(`json`, registerSchema),
     async (c) => {
       const { name, email, password } = c.req.valid(`json`);
       const { account } = await createAdminClient();
@@ -49,7 +50,7 @@ const app = new Hono()
         password
       );
       setCookie(c, AUTH_COOKIE, session.secret, {
-        path: `/`,
+        path: SRC_HOME,
         httpOnly: true,
         secure: true,
         sameSite: `strict`,
@@ -58,7 +59,7 @@ const app = new Hono()
       return c.json({ data: user });
     }
   )
-  .post(`/logout`, sessionMiddleware,
+  .post(SRC_LOGOUT, sessionMiddleware,
     async (c) => {
       const account = c.get(`account`);
 

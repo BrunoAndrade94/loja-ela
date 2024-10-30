@@ -1,0 +1,3 @@
+a unica tela que so pode ser acessada atraves do usuario e senha, seria a tela de usuario onde contem suas COMPRAS, 
+
+futuramente analisar como sites de vendas funciona.

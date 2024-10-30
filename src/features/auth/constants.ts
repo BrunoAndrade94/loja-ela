@@ -1,1 +1,1 @@
-export const AUTH_COOKIE = "cbd-loja-ela-session"
+export const AUTH_COOKIE = "cbd-loja-ela-session"; 
